@@ -99,6 +99,7 @@ public class ArticleController {
 //테스트 용 config 서버에서 설정값을 가져오는 컨트롤러
 @RestController
 @RefreshScope
+@RequestMapping("/public") // 공개 경로 추가
 class TestConfigController {
     @Value("${app.test-message:기본값}")
     private String testMessage;

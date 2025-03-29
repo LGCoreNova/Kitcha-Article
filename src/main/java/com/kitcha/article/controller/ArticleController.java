@@ -8,6 +8,8 @@ import com.kitcha.article.service.MyPickNewsService;
 import com.kitcha.article.service.RandomNewsService;
 import com.kitcha.article.service.UploadNewsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -91,5 +93,18 @@ public class ArticleController {
         List<MyPickNewsResponseDto> newsList = uploadNewsService.processUploadedImage(file);
         // 2. 결과 반환
         return ResponseEntity.ok(newsList);
+    }
+}
+
+//테스트 용 config 서버에서 설정값을 가져오는 컨트롤러
+@RestController
+@RefreshScope
+class TestConfigController {
+    @Value("${app.test-message:기본값}")
+    private String testMessage;
+    
+    @GetMapping("/test-config")
+    public String getTestMessage() {
+        return testMessage;
     }
 }

@@ -77,7 +77,7 @@ public class GroqApiClient {
                 Map.of("role", "system", "content", "당신은 뉴스 기사를 한글로 요약하는 전문가입니다."),
                 Map.of("role", "user", "content", prompt + "\n\n" + trimContent(content))
         );
-        return sendRequest("mistral-saba-24b llama-3.3-70b-versatile", messages, 500, 0.7);
+        return sendRequest("mistral-saba-24b", messages, 500, 0.7);
     }
 
     // 텍스트 핵심 키워드 추출
@@ -86,7 +86,7 @@ public class GroqApiClient {
                 Map.of("role", "system", "content", "당신은 뉴스 기사에서 핵심 키워드를 한글로 하나 추출하는 전문가입니다."),
                 Map.of("role", "user", "content", "이 기사에서 가장 중요한 핵심 키워드를 한글로 하나만 알려주세요: \n\n" + content)
         );
-        return sendRequest("mistral-saba-24b llama-3.3-70b-versatile", messages, 10, 0.3);
+        return sendRequest("mistral-saba-24b", messages, 10, 0.3);
     }
 
     // 이미지 속 키워드 추출

@@ -52,11 +52,8 @@ pipeline {
                             aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 803691999553.dkr.ecr.us-west-1.amazonaws.com
                             docker build --tag kitcha/article:${imageTag} -f Dockerfile .
                             docker tag kitcha/article:${imageTag} ${ecrTagPrefix}:${imageTag}
+
                             docker tag kitcha/article:${imageTag} ${ecrTagPrefix}:${deployTag}
-                            
-                            # 항상 ECR에 이미지 푸시
-                            echo "ECR에 이미지 푸시 중..."
-                            docker push ${ecrTagPrefix}:${imageTag}
                             docker push ${ecrTagPrefix}:${deployTag}
                         """,
                         execTimeout: 600000,
